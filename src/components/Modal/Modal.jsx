@@ -1,6 +1,21 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 const Modal = ({ image, handleCloseModal }) => {
+  const closeModal = useCallback(
+    e => {
+      if (e.target.className === 'Overlay') {
+        handleCloseModal();
+        return;
+      }
+
+      if (e.code === 'Escape') {
+        handleCloseModal();
+        return;
+      }
+    },
+    [handleCloseModal]
+  );
+
   useEffect(() => {
     window.addEventListener('keydown', closeModal);
     document.body.style.overflow = 'hidden';
@@ -10,18 +25,6 @@ const Modal = ({ image, handleCloseModal }) => {
       document.body.style.overflow = 'auto';
     };
   }, [closeModal]);
-
-  function closeModal(e) {
-    if (e.target.className === 'Overlay') {
-      handleCloseModal();
-      return;
-    }
-
-    if (e.code === 'Escape') {
-      handleCloseModal();
-      return;
-    }
-  }
 
   const { largeImageURL, tags } = image;
 

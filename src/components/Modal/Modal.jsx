@@ -9,9 +9,9 @@ const Modal = ({ image, handleCloseModal }) => {
       window.removeEventListener('keydown', closeModal);
       document.body.style.overflow = 'auto';
     };
-  }, []);
+  }, [closeModal]);
 
-  const closeModal = e => {
+  function closeModal(e) {
     if (e.target.className === 'Overlay') {
       handleCloseModal();
       return;
@@ -21,7 +21,7 @@ const Modal = ({ image, handleCloseModal }) => {
       handleCloseModal();
       return;
     }
-  };
+  }
 
   const { largeImageURL, tags } = image;
 
